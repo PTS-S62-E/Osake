@@ -1,8 +1,10 @@
 package com.pts62.common.facade
 
+import java.io.Serializable
+
 data class InvoiceFacade(
         val date: String,
-        val bedrag:Int,
-        val eigenaar: OwnerFacade,
-        val auto: AutoFacade
-)
+        val amount:Int,
+        val owner: OwnerFacade,
+        val vehicle: VehicleFacade
+) : Serializable
