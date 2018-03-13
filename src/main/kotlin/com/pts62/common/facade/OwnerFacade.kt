@@ -6,7 +6,6 @@ data class OwnerFacade(
         val name: String,
         val email: String? = null,
         val address: String,
-        val city:String,
-        val vehicles:List<VehicleFacade> = emptyList(),
+        val city: String,
         val password: String
 ) : Serializable
