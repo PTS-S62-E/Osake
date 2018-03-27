@@ -2,14 +2,14 @@
 
 This is the shared library for this organization, every application can use it to get the common functionality most applications need.
 
-# Contributing
+## Contributing
 You can contribute buy forking this repo, or by submitting an issue here: https://github.com/PTS-S62-E/Osake/issues
 
-# Kotlin
+## Kotlin
 As you may have noticed, this library is written in Kotlin, a language that is 100% compatible with Java.
 Learn more here http://kotlinlang.org/
 
-# Artifactory Repository
+## Artifactory Repository
 To connect to the Artifactory repository, where for example the common library is hosted, you need to provide login credentials.
 This can be done by adding a server entry to your local maven settings.
 
