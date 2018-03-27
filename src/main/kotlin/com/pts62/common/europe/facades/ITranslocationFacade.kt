@@ -1,11 +1,17 @@
 package com.pts62.common.europe.facades
 
-import com.pts62.common.europe.ITransLocation
+import com.rekeningrijden.europe.interfaces.ITransLocation
 
 class ITranslocationFacade(
-        override val lat: Double,
-        override val lon: Double,
-        override val Time: String,
-        override val Serialnumber: String,
-        override val Countrycode: String
-) : ITransLocation
+        private val lat: Double,
+        private val lon: Double,
+        private val dateTime: String,
+        private val serialNumber: String,
+        private val countryCode: String
+) : ITransLocation {
+    override fun getLat() = this.lat
+    override fun getDateTime() = this.dateTime
+    override fun getCountryCode() = this.countryCode
+    override fun getLon() = this.lon
+    override fun getSerialNumber() = this.serialNumber
+}

@@ -1,8 +1,10 @@
 package com.pts62.common.europe.facades
 
-import com.pts62.common.europe.IJourney
-import com.pts62.common.europe.ITransLocation
+import com.rekeningrijden.europe.interfaces.IJourney
+import com.rekeningrijden.europe.interfaces.ITransLocation
 
 data class IJourneyFacade(
-        override val TransLocations: List<ITransLocation>
-) : IJourney
+        private val translocations: List<ITransLocation>
+) : IJourney {
+    override fun getTransLocations() = this.translocations
+}

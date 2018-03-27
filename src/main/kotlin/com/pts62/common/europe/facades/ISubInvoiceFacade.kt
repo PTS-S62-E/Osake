@@ -1,12 +1,17 @@
 package com.pts62.common.europe.facades
 
-import com.pts62.common.europe.ISubInvoice
-import java.math.BigDecimal
+import com.rekeningrijden.europe.interfaces.ISubInvoice
 
 data class ISubInvoiceFacade(
-        override val InvoiceNumber: String,
-        override val Country: String,
-        override val PaymentStatus: Boolean,
-        override val InvoiceDate: String,
-        override val Price: BigDecimal
-) : ISubInvoice
+        private val invoiceNumber: String,
+        private val country: String,
+        private val paymentStatus: Boolean,
+        private val invoiceDate: String,
+        private val price: Int
+) : ISubInvoice {
+    override fun getInvoiceNumber() = this.invoiceNumber
+    override fun getPrice() = (this.price.toDouble() / 100.0)
+    override fun getPaymentStatus() = this.paymentStatus
+    override fun getCountry() = this.country
+    override fun getInvoiceDate() = this.invoiceDate
+}
