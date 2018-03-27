@@ -10,7 +10,7 @@ data class ISubInvoiceFacade(
         private val price: Int
 ) : ISubInvoice {
     override fun getInvoiceNumber() = this.invoiceNumber
-    override fun getPrice() = this.price.toDouble()
+    override fun getPrice() = (this.price.toDouble() / 100.0)
     override fun getPaymentStatus() = this.paymentStatus
     override fun getCountry() = this.country
     override fun getInvoiceDate() = this.invoiceDate
