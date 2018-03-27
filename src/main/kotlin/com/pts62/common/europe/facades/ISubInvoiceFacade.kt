@@ -8,5 +8,5 @@ data class ISubInvoiceFacade(
         override val Country: String,
         override val PaymentStatus: Boolean,
         override val InvoiceDate: String,
-        override val Price: BigDecimal
+        override val Price: Int
 ) : ISubInvoice
