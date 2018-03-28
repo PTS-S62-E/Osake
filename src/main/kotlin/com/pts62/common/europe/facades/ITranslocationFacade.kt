@@ -2,7 +2,7 @@ package com.pts62.common.europe.facades
 
 import com.rekeningrijden.europe.interfaces.ITransLocation
 
-class ITranslocationFacade(
+open class ITranslocationFacade(
         private val lat: Double,
         private val lon: Double,
         private val dateTime: String,
