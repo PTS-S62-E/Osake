@@ -2,7 +2,7 @@ package com.pts62.common.europe.facades
 
 import com.rekeningrijden.europe.interfaces.ISubInvoice
 
-data class ISubInvoiceFacade(
+open class ISubInvoiceFacade(
         private val invoiceNumber: String,
         private val country: String,
         private val paymentStatus: Boolean,
