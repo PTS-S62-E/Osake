@@ -27,7 +27,7 @@ pipeline {
                 maven: 'Maven 3.5.3',
                 mavenSettingsConfig: 'maven_artifactory'
             ) {
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://85.144.215.28:9001 -Dsonar.login=089ecbe71f30a12f9af77098b09921b83cf88786''
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://85.144.215.28:9001 -Dsonar.login=089ecbe71f30a12f9af77098b09921b83cf88786'
             }
         }
     }
