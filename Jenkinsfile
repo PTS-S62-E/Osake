@@ -45,16 +45,16 @@ pipeline {
                             "target": "common"
                         }
                     ]
-                }
+                } """
 
                 def uploadSpec = """ {
                     "files": [
                         {
                             "pattern": "target/*.jar",
-                            "target": "libs-release-local/com/pts6/common/"
+                            "target": "libs-release-local/"
                         }
                     ]
-                }
+                } """
 
                 server.upload(uploadSpec)
             }
