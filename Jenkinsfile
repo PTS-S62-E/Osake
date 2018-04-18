@@ -38,26 +38,16 @@ pipeline {
                 mavenSettingsConfig: 'maven_artifactory'
             ) {
                 script {
-                    server = Artifactory.server 'Artifactory'
-                      downloadSpec = """ {
-                          "files": [
-                              {
-                                  "pattern": "libs-release-local/com/pts6/common/*.jar",
-                                  "target": "common"
-                              }
-                          ]
-                      }"""
+                    server = Artifactory.server "artifactory"
+                    buildInfo = Artifactory.newBuildInfo()
 
-                      uploadSpec = """ {
-                          "files": [
-                              {
-                                  "pattern": "target/*.jar",
-                                  "target": "libs-release-local/"
-                              }
-                          ]
-                      }"""
+                    def rtMaven = Artifactory.newMavenBuild()
+                            rtMaven.tool = "Maven 3.x"
+                            rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
+                            rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+                            rtMaven.run pom: 'pom.xml', goals: 'install', buildInfo: buildInfo
 
-                      server.upload(uploadSpec)
+                    server.publishBuildInfo buildInfo
                 }
             }
         }
