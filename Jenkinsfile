@@ -38,7 +38,7 @@ pipeline {
                 mavenSettingsConfig: 'maven_artifactory'
             ) {
                 script {
-                    server = Artifactory.server "artifactory"
+                    server = Artifactory.server "Artifactory"
                     buildInfo = Artifactory.newBuildInfo()
 
                     def rtMaven = Artifactory.newMavenBuild()
