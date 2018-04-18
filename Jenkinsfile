@@ -1,8 +1,8 @@
 pipeline {
   agent any
 
-  def server = Artifactory.server 'Artifactory'
-  def downloadSpec = """ {
+  server = Artifactory.server 'Artifactory'
+  downloadSpec = """ {
       "files": [
           {
               "pattern": "libs-release-local/com/pts6/common/*.jar",
@@ -11,7 +11,7 @@ pipeline {
       ]
   }"""
 
-  def uploadSpec = """ {
+  uploadSpec = """ {
       "files": [
           {
               "pattern": "target/*.jar",
