@@ -1,5 +1,25 @@
 pipeline {
   agent any
+
+  def server = Artifactory.server 'Artifactory'
+  def downloadSpec = """ {
+      "files": [
+          {
+              "pattern": "libs-release-local/com/pts6/common/*.jar",
+              "target": "common"
+          }
+      ]
+  }"""
+
+  def uploadSpec = """ {
+      "files": [
+          {
+              "pattern": "target/*.jar",
+              "target": "libs-release-local/"
+          }
+      ]
+  }"""
+
   stages {
     stage('Build') {
         steps {
@@ -37,24 +57,6 @@ pipeline {
                 maven: 'Maven 3.5.3',
                 mavenSettingsConfig: 'maven_artifactory'
             ) {
-                def server = Artifactory.server 'Artifactory'
-                def downloadSpec = """ {
-                    "files": [
-                        {
-                            "pattern": "libs-release-local/com/pts6/common/*.jar",
-                            "target": "common"
-                        }
-                    ]
-                } """
-
-                def uploadSpec = """ {
-                    "files": [
-                        {
-                            "pattern": "target/*.jar",
-                            "target": "libs-release-local/"
-                        }
-                    ]
-                } """
 
                 server.upload(uploadSpec)
             }
