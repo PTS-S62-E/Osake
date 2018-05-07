@@ -1,14 +1,13 @@
 package com.pts62.common.finland.communication
 
-import com.rabbitmq.client.Channel
-import com.rabbitmq.client.Connection
-import com.rabbitmq.client.ConnectionFactory
+import com.rabbitmq.client.*
+import java.io.IOException
 
-class QueueConnector(
-        queue : String
-) {
-    private val connection: Connection
-    val channel : Channel
+class QueueConnector {
+    var connection: Connection
+        private set
+    var channel : Channel
+        private set
 
     init {
         val connectionFactory = ConnectionFactory()
@@ -16,6 +15,37 @@ class QueueConnector(
         this.connection = connectionFactory.newConnection()
 
         this.channel = this.connection.createChannel()
-        this.channel.queueDeclare(queue, false, false, false, null)
+
+        this.channel.exchangeDeclare(QueueConstants.RekeningRijdenExchange, BuiltinExchangeType.TOPIC)
+    }
+
+    fun publishMessage(routingKey:String, message:String) {
+        this.channel.basicPublish(QueueConstants.RekeningRijdenExchange, routingKey, null, message.toByteArray(QueueConstants.DefaultCharset))
+    }
+
+    fun readMessage(routingKey: String, callback: IQueueSubscribeCallback) {
+        val consumer = object : DefaultConsumer(channel) {
+            @Throws(IOException::class)
+            override fun handleDelivery(consumerTag: String?, envelope: Envelope,
+                                        properties: AMQP.BasicProperties?, body: ByteArray?) {
+                val message = String(body!!, QueueConstants.DefaultCharset)
+                println(" [x] Received '" + envelope.routingKey + "':'" + message + "'")
+                callback.onMessageReceived(message)
+            }
+        }
+        this.channel.basicConsume(routingKey, consumer)
+    }
+
+    fun readMessage(routingKey: String, callback: (msg:String) -> Unit) {
+        val consumer = object : DefaultConsumer(channel) {
+            @Throws(IOException::class)
+            override fun handleDelivery(consumerTag: String?, envelope: Envelope,
+                                        properties: AMQP.BasicProperties?, body: ByteArray?) {
+                val message = String(body!!, QueueConstants.DefaultCharset)
+                println(" [x] Received '" + envelope.routingKey + "':'" + message + "'")
+                callback(message)
+            }
+        }
+        this.channel.basicConsume(routingKey, consumer)
     }
 }

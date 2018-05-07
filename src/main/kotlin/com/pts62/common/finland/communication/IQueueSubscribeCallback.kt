@@ -1,7 +1,7 @@
 package com.pts62.common.finland.communication
 
-interface IQueueSubscribeCallback<T> {
+interface IQueueSubscribeCallback {
 
-    fun onMessageReceived(message: T)
+    fun onMessageReceived(message: String)
 
 }
