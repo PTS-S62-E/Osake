@@ -1,3 +1,4 @@
+import com.pts62.common.finland.communication.QueueConnector
 import com.pts62.common.finland.communication.QueueConstants
 import com.rabbitmq.client.*
 
