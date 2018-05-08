@@ -9,7 +9,7 @@ public class JavaQueueExample {
 
     private QueueConnector connector = new QueueConnector();
 
-    private void readQueue() {
+    public void readQueue() {
         CommunicationBuilder builder = new CommunicationBuilder()
                 .setCountry("FI")
                 .setApplication("Antaminen")
@@ -25,7 +25,7 @@ public class JavaQueueExample {
         connector.readMessage(builder.build(), (IQueueSubscribeCallback) System.out::println);
     }
 
-    private void writeQueue() {
+    public void writeQueue() {
         CommunicationBuilder builder = new CommunicationBuilder()
                 .setCountry("FI")
                 .setApplication("Antaminen")
@@ -34,4 +34,12 @@ public class JavaQueueExample {
         connector.publishMessage(builder.build(), "asdf");
     }
 
+}
+
+class JavaQueueContainer {
+    public static void main(String[] args) {
+        JavaQueueExample e = new JavaQueueExample();
+        e.readQueue();
+        e.writeQueue();
+    }
 }

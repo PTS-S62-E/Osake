@@ -24,19 +24,6 @@ class QueueConnector {
     }
 
     fun readMessage(routingKey: String, callback: IQueueSubscribeCallback) {
-        val consumer = object : DefaultConsumer(channel) {
-            @Throws(IOException::class)
-            override fun handleDelivery(consumerTag: String?, envelope: Envelope,
-                                        properties: AMQP.BasicProperties?, body: ByteArray?) {
-                val message = String(body!!, QueueConstants.DefaultCharset)
-                println(" [x] Received '" + envelope.routingKey + "':'" + message + "'")
-                callback.onMessageReceived(message)
-            }
-        }
-        this.channel.basicConsume(routingKey, consumer)
-    }
-
-    fun readMessage(routingKey: String, callback: (msg:String) -> Unit) {
         channel.exchangeDeclare(QueueConstants.RekeningRijdenExchange, "topic")
         val queueName = channel.queueDeclare().queue
 
@@ -47,9 +34,17 @@ class QueueConnector {
             override fun handleDelivery(consumerTag: String?, envelope: Envelope,
                                         properties: AMQP.BasicProperties?, body: ByteArray?) {
                 val message = String(body!!, QueueConstants.DefaultCharset)
-                callback(message)
+                callback.onMessageReceived(message)
             }
         }
         channel.basicConsume(queueName, true, consumer)
+    }
+
+    fun readMessage(routingKey: String, callback: (msg:String) -> Unit) {
+        this.readMessage(routingKey, object : IQueueSubscribeCallback {
+            override fun onMessageReceived(message: String) {
+                callback(message)
+            }
+        })
     }
 }
