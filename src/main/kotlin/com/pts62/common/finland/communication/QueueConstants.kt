@@ -7,10 +7,6 @@ class QueueConstants {
         @JvmStatic
         val QueueAddress = "teunwillems.nl"
         @JvmStatic
-        val AntaMinenQueue = "AntaMinenQueue"
-        @JvmStatic
-        val RegistrationQueue = "RegistrationQueue"
-        @JvmStatic
         val RekeningRijdenExchange = "REKENINGRIJDEN_EXCHANGE"
         @JvmStatic
         val DefaultCharset = Charset.forName("UTF-8")

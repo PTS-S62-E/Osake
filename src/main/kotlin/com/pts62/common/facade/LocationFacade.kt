@@ -2,7 +2,7 @@ package com.pts62.common.facade
 
 import java.io.Serializable
 
-data class LocationFacade(
+open class LocationFacade(
         val vehicle: VehicleFacade,
         val latitude: Double,
         val longtitude: Double,

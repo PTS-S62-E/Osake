@@ -2,7 +2,7 @@ package com.pts62.common.facade
 
 import java.io.Serializable
 
-data class VehicleFacade (
+open class VehicleFacade (
         val plate: String,
         val brand: String,
         val type: String,

@@ -15,29 +15,35 @@ class CommunicationBuilder {
     /**
      * Each application specifies this themself
      */
-    fun setMessage(msg:String) {
+    fun setMessage(msg:String): CommunicationBuilder {
         this.topicRouterKey[2] = msg
+        return this
     }
 
     /**
      * Sets the application the message should be sent to
      */
-    fun setApplication(application: String) {
+    fun setApplication(application: String): CommunicationBuilder {
         this.topicRouterKey[1] = application
+        return this
     }
 
     /**
      * Sets the country that should receive this message, based on countrycode
      * @see CountryFacade.countryCode
      */
-    fun setCountry(country: String) {
+    fun setCountry(country: String): CommunicationBuilder {
         this.topicRouterKey[0] = country
+        return this
     }
 
     /**
      * Sets the country that should receive this message, based on countrycode
      * @see CountryFacade.countryCode
      */
-    fun setCountry(countryFacade: CountryFacade) = this.setCountry(countryFacade.countryCode)
+    fun setCountry(countryFacade: CountryFacade) {
+        this.setCountry(countryFacade.countryCode)
+        return
+    }
 
 }
