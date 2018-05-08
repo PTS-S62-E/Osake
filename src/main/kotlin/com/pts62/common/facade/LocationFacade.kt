@@ -1,5 +1,6 @@
 package com.pts62.common.facade
 
+import com.pts62.common.facade.verplaatsing.VehicleFacade
 import java.io.Serializable
 
 open class LocationFacade(

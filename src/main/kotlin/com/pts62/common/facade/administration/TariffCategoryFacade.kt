@@ -1,8 +1,8 @@
-package com.pts62.common.facade
+package com.pts62.common.facade.administration
 
 import java.io.Serializable
 
-open class CategoryFacade(
+open class TariffCategoryFacade(
         val level: Int,
         val rate: Int
 ) : Serializable
