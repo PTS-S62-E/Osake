@@ -1,4 +1,4 @@
-package com.pts62.common.finland.UTIL;
+package com.pts62.common.finland.util;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
