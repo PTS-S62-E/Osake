@@ -17,9 +17,14 @@ class AntaminenService {
 
     private val mediaTypeJson = MediaType.parse("application/json; charset=utf-8")
 
-    fun getAntaminenUrl() = Dotenv.load()["HTTP_ANTAMINEN_URL"]
-    fun getAntaminenEmail() = Dotenv.load()["HTTP_ANTAMINEN_EMAIL"]
-    fun getAntaminenPassword() = Dotenv.load()["HTTP_ANTAMINEN_PASSWORD"]
+    private val serviceConfig:IServiceConfiguration by lazy {
+        object : IServiceConfiguration {
+            override fun getServiceAddress() = "http://192.168.24.100:8082/rekening-administratie/api"
+            override fun getServiceCredential() = "proftaak@example.com"
+            override fun getServicePassword() = "proftaak"
+        }
+    }
+
 
     private fun getHttpClient() =
             OkHttpClient
@@ -33,10 +38,10 @@ class AntaminenService {
             return this.jwt_token!!
         }
 
-        val jwtRequestParameters = JwtRequestParameters(this.getAntaminenEmail()!!, this.getAntaminenPassword()!!)
+        val jwtRequestParameters = JwtRequestParameters(this.serviceConfig.getServiceCredential(), this.serviceConfig.getServicePassword())
 
         val postBody = RequestBody.create(this.mediaTypeJson, Gson().toJson(jwtRequestParameters))
-        val antaminenLoginUrl = "${this.getAntaminenUrl()}/accounts/login"
+        val antaminenLoginUrl = "${this.serviceConfig.getServiceAddress()}/accounts/login"
         val request = Request
                 .Builder()
                 .url(antaminenLoginUrl)
@@ -56,7 +61,7 @@ class AntaminenService {
     }
 
     fun getVehicles(): List<CarResponse> {
-        val antaminenCarUrl = "${this.getAntaminenUrl()}/accounts/cars"
+        val antaminenCarUrl = "${this.serviceConfig.getServiceAddress()}/accounts/cars"
         val request = Request
                 .Builder()
                 .url(antaminenCarUrl)
@@ -71,7 +76,7 @@ class AntaminenService {
     fun getVehicleByLicensePlate(licensePlate: String): GetVehicleByLicensePlateResponse {
 
         // Example: xx-yy-69
-        val antaminenCarUrl = "${this.getAntaminenUrl()}/vehicles/licensePlate/$licensePlate/history/ownership"
+        val antaminenCarUrl = "${this.serviceConfig.getServiceAddress()}/vehicles/licensePlate/$licensePlate/history/ownership"
         val request = Request
                 .Builder()
                 .url(antaminenCarUrl)
@@ -83,4 +88,8 @@ class AntaminenService {
         val r = Gson().fromJson(bodyString) as GetVehicleByLicensePlateResponse
         return r
     }
+}
+
+fun main(args:Array<String>) {
+    AntaminenService().getVehicleByLicensePlate("xx-yy-69")
 }
