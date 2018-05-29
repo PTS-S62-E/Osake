@@ -95,6 +95,32 @@ public class RegistrationMovementService {
     }
 
     /**
+     * Create a tracking
+     * @param licensePlate
+     * @throws IOException
+     * @throws CommunicationException
+     */
+    public void createTracking(String licensePlate) throws IOException, CommunicationException {
+        String urlPart = properties.getProperty("CREATE_TRACKING");
+        String url = BASE_URL + urlPart;
+        ObjectMapper mapper = new ObjectMapper();
+        SendRequest.sendPostPlainText(url, licensePlate);
+    }
+
+    /**
+     * Delete a tracking
+     * @param licensePlate
+     * @throws IOException
+     * @throws CommunicationException
+     */
+    public void deleteTracking(String licensePlate) throws IOException, CommunicationException {
+        String urlPart = properties.getProperty("DELETE_TRACKING");
+        urlPart = urlPart.replace(":licensePlate", licensePlate);
+        String url = BASE_URL + urlPart;
+        SendRequest.sendDelete(url);
+    }
+
+    /**
      * Get a single translocation from the movement registration api based on the ID of the translocations
      * @param id ID of the translocation
      * @return Returns a TranslocationDTO containing the Translocation that was fetched from the external api
