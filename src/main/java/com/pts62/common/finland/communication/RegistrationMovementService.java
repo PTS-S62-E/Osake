@@ -18,6 +18,15 @@ import java.util.logging.Logger;
 public class RegistrationMovementService {
 
     private static String BASE_URL;
+
+    /**
+     * Use this to set the baseUrl for TEST environment.
+     * @param baseUrl
+     */
+    public void setBaseUrl(String baseUrl){
+        BASE_URL = baseUrl;
+    }
+
     private Properties properties;
 
     private static RegistrationMovementService _instance;
