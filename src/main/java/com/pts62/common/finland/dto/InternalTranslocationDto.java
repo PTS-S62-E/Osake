@@ -16,4 +16,8 @@ public class InternalTranslocationDto extends TranslocationDto {
 		super();
 	}
 
+	public InternalTranslocationDto(String serialNumber, double latitude, double longitude, String timestamp, String countryCode, long id){
+		super(serialNumber,latitude, longitude, timestamp, countryCode);
+		this.id = id;
+	}
 }
