@@ -10,12 +10,12 @@ class CommunicationBuilder {
      * Creates the topic id based on message, application and country
      * Subscribes to EVERYTHING when nothing is set
      */
-    fun build() = this.topicRouterKey.joinToString(".")
+    fun build() = this.topicRouterKey.reversed().joinToString(".")
 
     /**
      * Each application specifies this themself
      */
-    fun setMessage(msg:String): CommunicationBuilder {
+    fun setMessage(msg: String): CommunicationBuilder {
         this.topicRouterKey[2] = msg
         return this
     }
@@ -41,9 +41,9 @@ class CommunicationBuilder {
      * Sets the country that should receive this message, based on countrycode
      * @see CountryFacade.countryCode
      */
-    fun setCountry(countryFacade: CountryFacade) {
+    fun setCountry(countryFacade: CountryFacade): CommunicationBuilder {
         this.setCountry(countryFacade.countryCode)
-        return
+        return this
     }
 
 }
