@@ -1,6 +1,6 @@
 package com.pts62.common.finland.communication.test
 
-import com.pts62.common.finland.communication.QueueConstants
+import com.pts62.common.finland.communication.QueueConfig
 import com.rabbitmq.client.ConnectionFactory
 import java.util.*
 
@@ -11,11 +11,12 @@ object QueueSender {
     fun main(argv: Array<String>) {
 
         val factory = ConnectionFactory()
-        factory.host = QueueConstants.QueueAddress
+        val config = QueueConfig()
+        factory.host = config.QueueAddress
         val connection = factory.newConnection()
         val channel = connection.createChannel()
 
-        channel.exchangeDeclare(QueueConstants.RekeningRijdenExchange, "topic")
+        channel.exchangeDeclare(config.RekeningRijdenExchange, "topic")
 
         val scanner = Scanner(System.`in`)
         while (true) {
@@ -28,7 +29,7 @@ object QueueSender {
             val message = strings.drop(1).joinToString("")
             val routingKey = strings[0]
 
-            channel.basicPublish(QueueConstants.RekeningRijdenExchange, routingKey, null, message.toByteArray(QueueConstants.DefaultCharset))
+            channel.basicPublish(config.RekeningRijdenExchange, routingKey, null, message.toByteArray(config.DefaultCharset))
             println(" [x] Sent $routingKey:$message")
         }
 

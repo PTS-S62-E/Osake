@@ -18,6 +18,15 @@ import java.util.logging.Logger;
 public class RegistrationMovementService {
 
     private static String BASE_URL;
+
+    /**
+     * Use this to set the baseUrl for TEST environment.
+     * @param baseUrl
+     */
+    public void setBaseUrl(String baseUrl){
+        BASE_URL = baseUrl;
+    }
+
     private Properties properties;
 
     private static RegistrationMovementService _instance;
@@ -92,6 +101,32 @@ public class RegistrationMovementService {
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.readValue(response, AdministrationDto.class);
+    }
+
+    /**
+     * Create a tracking
+     * @param licensePlate
+     * @throws IOException
+     * @throws CommunicationException
+     */
+    public void createTracking(String licensePlate) throws IOException, CommunicationException {
+        String urlPart = properties.getProperty("CREATE_TRACKING");
+        String url = BASE_URL + urlPart;
+        ObjectMapper mapper = new ObjectMapper();
+        SendRequest.sendPostPlainText(url, licensePlate);
+    }
+
+    /**
+     * Delete a tracking
+     * @param licensePlate
+     * @throws IOException
+     * @throws CommunicationException
+     */
+    public void deleteTracking(String licensePlate) throws IOException, CommunicationException {
+        String urlPart = properties.getProperty("DELETE_TRACKING");
+        urlPart = urlPart.replace(":licensePlate", licensePlate);
+        String url = BASE_URL + urlPart;
+        SendRequest.sendDelete(url);
     }
 
     /**

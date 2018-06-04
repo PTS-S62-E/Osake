@@ -9,17 +9,19 @@ public class VehicleDto implements Serializable {
 	private String brand;
 	private String type;
 	private String category;
-	private String hardwareSn;
+	private String serialNumber;
+	private String countryCode;
 
 	public VehicleDto(){}
 
-	public VehicleDto(long id, String licensePlate, String brand, String type, String category, String hardwareSn) {
+	public VehicleDto(long id, String licensePlate, String brand, String type, String category, String serialNumber, String countryCode) {
 		this.id = id;
 		this.licensePlate = licensePlate;
 		this.brand = brand;
 		this.type = type;
 		this.category = category;
-		this.hardwareSn = hardwareSn;
+		this.serialNumber = serialNumber;
+		this.countryCode = countryCode;
 	}
 
 	public long getId() {
@@ -62,12 +64,21 @@ public class VehicleDto implements Serializable {
 		this.category = category;
 	}
 
-	public String getHardwareSn() {
-		return hardwareSn;
+	public String getSerialNumber() {
+		return serialNumber;
 	}
 
-	public void setHardwareSn(String hardwareSn) {
-		this.hardwareSn = hardwareSn;
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
 }
 

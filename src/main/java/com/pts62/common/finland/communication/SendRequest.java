@@ -5,6 +5,7 @@ import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -51,6 +52,40 @@ public class SendRequest {
                 ContentType.APPLICATION_JSON);
 
         request.setEntity(requestEntity);
+
+        HttpResponse response = client.execute(request);
+
+        Sentry.getContext().recordBreadcrumb(new BreadcrumbBuilder().setMessage("Request URL: " + url).build());
+
+        return getResult(response);
+    }
+
+    public static String sendPostPlainText(String url, String text) throws IOException, CommunicationException {
+        if(url.isEmpty() || url == null) {
+            throw new CommunicationException("Please provide an URL for the request");
+        }
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(url);
+
+        StringEntity requestEntity = new StringEntity(
+                text,
+                ContentType.TEXT_PLAIN);
+
+        request.setEntity(requestEntity);
+
+        HttpResponse response = client.execute(request);
+
+        Sentry.getContext().recordBreadcrumb(new BreadcrumbBuilder().setMessage("Request URL: " + url).build());
+
+        return getResult(response);
+    }
+
+    public static String sendDelete(String url) throws IOException, CommunicationException {
+        if(url.isEmpty() || url == null) { throw new CommunicationException("Please provide an URL for the request"); }
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpDelete request = new HttpDelete(url);
 
         HttpResponse response = client.execute(request);
 
