@@ -10,7 +10,7 @@ class CommunicationBuilder {
      * Creates the topic id based on message, application and country
      * Subscribes to EVERYTHING when nothing is set
      */
-    fun build() = this.topicRouterKey.reversed().joinToString(".")
+    fun build() = this.topicRouterKey.joinToString(".")
 
     /**
      * Each application specifies this themself
