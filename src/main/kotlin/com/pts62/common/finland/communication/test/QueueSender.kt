@@ -11,11 +11,12 @@ object QueueSender {
     fun main(argv: Array<String>) {
 
         val factory = ConnectionFactory()
-        factory.host = QueueConfig.QueueAddress
+        val config = QueueConfig()
+        factory.host = config.QueueAddress
         val connection = factory.newConnection()
         val channel = connection.createChannel()
 
-        channel.exchangeDeclare(QueueConfig.RekeningRijdenExchange, "topic")
+        channel.exchangeDeclare(config.RekeningRijdenExchange, "topic")
 
         val scanner = Scanner(System.`in`)
         while (true) {
@@ -28,7 +29,7 @@ object QueueSender {
             val message = strings.drop(1).joinToString("")
             val routingKey = strings[0]
 
-            channel.basicPublish(QueueConfig.RekeningRijdenExchange, routingKey, null, message.toByteArray(QueueConfig.DefaultCharset))
+            channel.basicPublish(config.RekeningRijdenExchange, routingKey, null, message.toByteArray(config.DefaultCharset))
             println(" [x] Sent $routingKey:$message")
         }
 
