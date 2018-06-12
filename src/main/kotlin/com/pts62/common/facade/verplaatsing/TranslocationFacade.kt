@@ -8,6 +8,7 @@ open class TranslocationFacade(
         val longitude: Double? = null,
         val timestamp: String? = null,
         val countryCode: String? = null,
+        val serialNumber: String? = null,
         val flagged: Boolean? = null,
         val vehicle: VehicleFacade? = null
 ) : Serializable
