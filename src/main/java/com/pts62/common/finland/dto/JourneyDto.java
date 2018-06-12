@@ -1,8 +1,6 @@
 package com.pts62.common.finland.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.pts62.common.facade.verplaatsing.TranslocationFacade;
-import com.rekeningrijden.europe.interfaces.IJourney;
 
 import java.io.Serializable;
 import java.util.ArrayList;
