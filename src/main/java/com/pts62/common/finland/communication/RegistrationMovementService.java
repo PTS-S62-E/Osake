@@ -103,6 +103,29 @@ public class RegistrationMovementService {
         return mapper.readValue(response, AdministrationDto.class);
     }
 
+    public AdministrationDto getTranslocationsByLicensePlate(String licensePlate, String startDate, String endDate) throws CommunicationException, IOException {
+        if(licensePlate == null || licensePlate.equals("")) { throw new CommunicationException("Please provide a licensePlate"); }
+
+        String urlPart = properties.getProperty("TRANSLOCATION_BY_LICENSEPLATE");
+
+        urlPart = urlPart.replace(":licensePlate", licensePlate);
+        urlPart = urlPart.replace(":startdate", startDate);
+        urlPart = urlPart.replace(":enddate", endDate);
+        urlPart = urlPart.replace(" ", "%20");
+        urlPart = urlPart.replace(":", "%3A");
+
+
+        String url = BASE_URL + urlPart;
+
+        String response = SendRequest.sendGet(url);
+
+        if(response.isEmpty()) { return null; }
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readValue(response, AdministrationDto.class);
+    }
+
     /**
      * Create a tracking
      * @param licensePlate
