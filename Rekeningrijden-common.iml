@@ -3,10 +3,10 @@
   <component name="AutoImportedSourceRoots">
     <option name="directories">
       <list>
-        <option value="C:\Github\PTS6\Osake/src/main/java" />
-        <option value="C:\Github\PTS6\Osake/src/main/kotlin" />
-        <option value="C:\Github\PTS6\Osake/src/test/java" />
-        <option value="C:\Github\PTS6\Osake/src/test/kotlin" />
+        <option value="$MODULE_DIR$/src/main/java" />
+        <option value="$MODULE_DIR$/src/main/kotlin" />
+        <option value="$MODULE_DIR$/src/test/java" />
+        <option value="$MODULE_DIR$/src/test/kotlin" />
       </list>
     </option>
   </component>
@@ -39,7 +39,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.github.luudvkeulen:EuropaInterfaces:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.luudvkeulen:EuropaInterfaces:1.2.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.2.41" level="project" />
